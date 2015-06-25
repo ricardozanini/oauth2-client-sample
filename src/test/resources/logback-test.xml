@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>${log.appender.file:-target/tests.log}</file>
+		<append>true</append>
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDDEBUG" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>warn</level>
+		</filter>
+		<target>System.err</target>
+	</appender>
+
+	<logger name="org.springframework" level="${log.sys.level:-TRACE}" />
+	<logger name="org.hibernate" level="${log.sys.level:-INFO}" />
+	<logger name="org.springframework.transaction" level="${log.sys.level:-INFO}" />
+	<logger name="org.springframework.jdbc" level="${log.sys.level:-INFO}" />
+	<logger name="org.apache" level="${log.sys.level:-INFO}" />
+	<logger name="org.jboss" level="${log.sys.level:-INFO}" />
+	<logger name="javax" level="${log.sys.level:-INFO}" />
+	<logger name="com.sun" level="${log.sys.level:-INFO}" />
+	<logger name="br.com.tecnobiz" level="${log.sys.level:-DEBUG}" />
+	<logger name="org.jboss" level="${log.sys.level:-INFO}" />
+
+	<root level="${log.root.level:-DEBUG}">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDDEBUG" />
+		<appender-ref ref="STDERR" />
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>
