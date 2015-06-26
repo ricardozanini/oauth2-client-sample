@@ -14,6 +14,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -137,8 +138,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		.addResourceLocations("/static/images/")
 		.setCachePeriod(DateTimeConstants.SECONDS_PER_DAY * 30); // um
 									 // mês
-
-	// swagger
     }
 
     @Override
@@ -173,4 +172,11 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	return resourceBundleMessageSource;
     }
 
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+	final CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+	resolver.setDefaultEncoding("UTF-8");
+	resolver.setMaxUploadSize(1024000);
+	return resolver;
+    }
 }
