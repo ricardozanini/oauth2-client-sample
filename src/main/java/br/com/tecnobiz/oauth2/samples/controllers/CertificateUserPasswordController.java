@@ -21,6 +21,7 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordAccessTokenProvider;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.security.oauth2.common.AuthenticationScheme;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -69,13 +70,21 @@ public class CertificateUserPasswordController {
 	    @RequestParam("keystore") MultipartFile ks) throws IOException {
 	final OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(
 		resourceDetails, context);
+	final ResourceOwnerPasswordAccessTokenProvider tokenProvider = new ResourceOwnerPasswordAccessTokenProvider();
 
 	try {
-	    resourceDetails.setClientId(ks.getOriginalFilename());
-	    restTemplate.setRequestFactory(this
+	    final ClientHttpRequestFactory requestFactory = this
 		    .createClientCertificateAuthRequestFactory(
 			    ks.getInputStream(),
-			    resourceDetails.getClientSecret()));
+			    resourceDetails.getClientSecret());
+	    
+	    resourceDetails.setClientId(ks.getOriginalFilename());
+	    // request factory para as operacoes OAuth2
+	    restTemplate.setRequestFactory(requestFactory);
+	    // request factory do provider (recuperação do token)
+	    tokenProvider.setRequestFactory(requestFactory);
+	    // associa o provider ao restTemplate das operações OAuth2
+	    restTemplate.setAccessTokenProvider(tokenProvider);
 	} catch (IOException e) {
 	    LOGGER.error("[obterAccessToken] Impossible to load keystore file", e);
 	    // TODO: our annotated exception would be nice
@@ -128,7 +137,7 @@ public class CertificateUserPasswordController {
 	}
 
 	final SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
-		sslContext, new String[] { "TLSv1" }, null,
+		sslContext, new String[] { "TLSv1", "TLSv1.1", "TLSv1.2" }, null,
 		SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 
 	return sslsf;

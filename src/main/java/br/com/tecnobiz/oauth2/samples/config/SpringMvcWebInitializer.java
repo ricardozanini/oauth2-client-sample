@@ -22,7 +22,10 @@ public class SpringMvcWebInitializer extends
     @Override
     protected Class<?>[] getRootConfigClasses() {
 	Security.addProvider(new BouncyCastleProvider());
-	System.getProperties().put("javax.net.debug", "ssl");
+	System.setProperty("javax.net.debug", "ssl,handshake");
+	System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+	System.setProperty("jdk.tls.client.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+	
 	
 	return new Class[] { WebAppConfig.class };
     }
