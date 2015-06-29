@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head></head>
+<body>
+	<div th:fragment="error" class="alert alert-danger" th:if="${error}">
+		Opa! Houve um problema: <strong th:text="${errorMsg}"></strong>
+	</div>
+</body>
+</html>

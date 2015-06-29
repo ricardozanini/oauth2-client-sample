@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/headTag :: headTag ('Houve um problema!')">
+<meta charset="ISO-8859-1" />
+<title></title>
+</head>
+<body>
+	<nav th:replace="fragments/header :: menu"></nav>
+	<div class="container" th:if="${error || errorCode == 500}">
+		<div class="page-header">
+			<h1>
+				Houve um problema!
+			</h1>
+		</div>
+		<div class="row">
+		  <div th:replace="fragments/alert :: error"></div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: scripts"></div>
+</body>
+</html>

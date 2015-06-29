@@ -35,7 +35,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Scope(WebApplicationContext.SCOPE_SESSION)
 @Controller
-public class CertificateUserPasswordController {
+public class CertificateUserPasswordController extends AccessTokenController {
 
     private static final Logger LOGGER = LoggerFactory
 	    .getLogger(CertificateUserPasswordController.class);
@@ -43,25 +43,19 @@ public class CertificateUserPasswordController {
     @Inject
     private OAuth2ClientContext context;
 
-    private final ModelAndView modelAndView;
+    @Override
+    public String getViewName() {
+        return "cert-password";
+    }
 
     public CertificateUserPasswordController() {
-	this.modelAndView = new ModelAndView("cert-password");
+	super();
 	this.setResourceDetails(new ResourceOwnerPasswordResourceDetails());
-    }
-
-    protected final void setResourceDetails(
-	    ResourceOwnerPasswordResourceDetails resourceDetails) {
-	this.modelAndView.addObject("resourceDetails", resourceDetails);
-    }
-
-    protected final void setAccessToken(OAuth2AccessToken accessToken) {
-	this.modelAndView.addObject("accessToken", accessToken);
     }
 
     @RequestMapping(value = "/cert-password/", method = RequestMethod.GET)
     public ModelAndView formView() {
-	return this.modelAndView;
+	return this.getModelAndView();
     }
 
     @RequestMapping(value = "/cert-password/", method = RequestMethod.POST)
@@ -87,8 +81,8 @@ public class CertificateUserPasswordController {
 	    restTemplate.setAccessTokenProvider(tokenProvider);
 	} catch (IOException e) {
 	    LOGGER.error("[obterAccessToken] Impossible to load keystore file", e);
-	    // TODO: our annotated exception would be nice
-	    throw e;
+	    this.handleError(e);
+	    return this.getModelAndView();
 	}
 
 	// the authentication happens on SSLContext.
@@ -102,7 +96,7 @@ public class CertificateUserPasswordController {
 
 	HttpClients.custom().setSSLSocketFactory(null);
 
-	return this.modelAndView;
+	return this.getModelAndView();
     }
 
     private ClientHttpRequestFactory createClientCertificateAuthRequestFactory(

@@ -97,7 +97,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 	templateEngine.setTemplateResolver(templateResolver);
 	templateEngine.addDialect(new SpringSecurityDialect());
-
+	
 	return templateEngine;
     }
 
@@ -114,6 +114,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
 	// registry.addViewController("/support/");
 	super.addViewControllers(registry);
+	registry.addViewController("/").setViewName("home");;
     }
 
     /**

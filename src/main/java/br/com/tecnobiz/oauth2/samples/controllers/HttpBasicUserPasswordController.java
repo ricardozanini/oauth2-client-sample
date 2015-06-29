@@ -15,30 +15,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Scope(WebApplicationContext.SCOPE_SESSION)
 @Controller
-public class HttpBasicUserPasswordController {
+public class HttpBasicUserPasswordController extends AccessTokenController {
 
     @Inject
     private OAuth2ClientContext context;
 
-    private final ModelAndView modelAndView;
-
     public HttpBasicUserPasswordController() {
-	this.modelAndView = new ModelAndView("httpbasic-password");
 	this.setResourceDetails(new ResourceOwnerPasswordResourceDetails());
-    }
-
-    protected final void setResourceDetails(
-	    ResourceOwnerPasswordResourceDetails resourceDetails) {
-	this.modelAndView.addObject("resourceDetails", resourceDetails);
-    }
-
-    protected final void setAccessToken(OAuth2AccessToken accessToken) {
-	this.modelAndView.addObject("accessToken", accessToken);
     }
 
     @RequestMapping(value = "/httpbasic-password/", method = RequestMethod.GET)
     public ModelAndView formView() {
-	return this.modelAndView;
+	return this.getModelAndView();
     }
 
     @RequestMapping(value = "/httpbasic-password/", method = RequestMethod.POST)
@@ -50,6 +38,11 @@ public class HttpBasicUserPasswordController {
 	this.setResourceDetails(resourceDetails);
 	this.setAccessToken(accessToken);
 
-	return this.modelAndView;
+	return this.getModelAndView();
+    }
+
+    @Override
+    public String getViewName() {
+	return "httpbasic-password";
     }
 }

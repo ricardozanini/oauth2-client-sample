@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/headTag :: headTag ('OAuth2 Simple Web Test Home')">
+<meta charset="ISO-8859-1" />
+<title></title>
+</head>
+<body>
+	<nav th:replace="fragments/header :: menu"></nav>
+	<div class="container">
+		<div class="page-header">
+			<h1>
+				OAuth2 Simple Web Test
+			</h1>
+		</div>
+		<div class="row">
+			<div class="col-xs-12"></div>
+			<hr />
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: scripts"></div>
+</body>
+</html>
