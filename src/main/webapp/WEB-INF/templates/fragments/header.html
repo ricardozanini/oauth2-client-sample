@@ -16,7 +16,9 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="@{/}"><img class="img-responsive brand" alt="OAuth Logo" th:src="@{/static/images/oauth_logo_menu.png}" /></a>
+				<a class="navbar-brand" th:href="@{/}"><img
+					class="img-responsive brand" alt="OAuth Logo"
+					th:src="@{/static/images/oauth_logo_menu.png}" /></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -24,24 +26,54 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-                        data-toggle="dropdown" role="button" aria-haspopup="true"
-                        aria-expanded="false">Obter Token <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/httpbasic-password/}">Client HTTP Basic + User Password</a></li>
-                            <li><a th:href="@{/cert-password/}">Client Certificate + User Password</a></li>
-                        </ul></li>
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Obter Token <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a th:href="@{/httpbasic-password/}">Client HTTP
+									Basic + User Password</a></li>
+							<li><a th:href="@{/cert-password/}">Client Certificate +
+									User Password</a></li>
+						</ul></li>
 				</ul>
-				
+
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">Refer&ecirc;ncias <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="#">Separated link</a></li>
+							<li><a
+								href="http://security.stackexchange.com/questions/3605/certificate-based-authentication-vs-username-and-password-authentication">Certificate
+									based authentication vs Username and Password authentication</a></li>
+							<li><a
+								href="http://docs.oracle.com/cd/E19226-01/820-7627/bncbs/index.html">HTTPS
+									Client Authentication</a></li>
+							<li><a
+								href="http://blog.distributedmatter.net/post/2008/06/09/HTTP-authentication-mechanisms-and-how-they-could-work-in-Restlet">HTTP
+									authentication mechanisms</a></li>
+							<!--  li role="separator" class="divider"></li -->
+							<li><a
+								href="https://en.wikipedia.org/wiki/Transport_Layer_Security#Client-authenticated_TLS_handshake">Client-authenticated
+									TLS handshake</a></li>
+							<li><a
+								href="http://stackoverflow.com/questions/1666052/java-https-client-certificate-authentication">Java
+									HTTPS client certificate authentication</a></li>
+							<li><a
+								href="http://stackoverflow.com/questions/28049529/java-keystore-handling-of-pkcs12">Java
+									KeyStore-Handling of PKCS12</a></li>
+							<li><a
+								href="http://hc.apache.org/httpcomponents-client-4.5.x/examples.html">HttpClient
+									Examples</a></li>
+							<li><a
+								href="http://stackoverflow.com/questions/6481627/java-security-illegal-key-size-or-default-parameters">Java
+									Security: Illegal key size or default parameters?</a></li>
+							<li><a href="https://tools.ietf.org/html/rfc5246">RFC
+									5246</a></li>
+							<li><a
+								href="http://www.oracle.com/technetwork/java/javase/tlsreadme2-176330.html">Transport
+									Layer Security (TLS) Renegotiation Issue</a></li>
+							<li><a
+								href="http://www.oracle.com/technetwork/java/javase/documentation/cve-2014-3566-2342133.html">Instructions
+									to disable SSL v3.0 in Oracle JDK and JRE</a></li>
 						</ul></li>
 				</ul>
 			</div>

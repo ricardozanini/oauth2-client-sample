@@ -5,6 +5,10 @@
 <head></head>
 <body>
 	<div th:fragment="error" class="alert alert-danger" th:if="${error}">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
 		Opa! Houve um problema: <strong th:text="${errorMsg}"></strong>
 	</div>
 </body>
