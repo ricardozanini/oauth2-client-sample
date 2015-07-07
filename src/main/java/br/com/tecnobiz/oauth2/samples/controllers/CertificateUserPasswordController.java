@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 
-import javax.inject.Inject;
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
@@ -19,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordAccessTokenProvider;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
@@ -40,12 +39,9 @@ public class CertificateUserPasswordController extends AccessTokenController {
     private static final Logger LOGGER = LoggerFactory
 	    .getLogger(CertificateUserPasswordController.class);
 
-    @Inject
-    private OAuth2ClientContext context;
-
     @Override
     public String getViewName() {
-        return "cert-password";
+	return "cert-password";
     }
 
     public CertificateUserPasswordController() {
@@ -63,7 +59,7 @@ public class CertificateUserPasswordController extends AccessTokenController {
 	    ResourceOwnerPasswordResourceDetails resourceDetails,
 	    @RequestParam("keystore") MultipartFile ks) throws IOException {
 	final OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(
-		resourceDetails, context);
+		resourceDetails, new DefaultOAuth2ClientContext());
 	final ResourceOwnerPasswordAccessTokenProvider tokenProvider = new ResourceOwnerPasswordAccessTokenProvider();
 
 	try {
@@ -71,7 +67,7 @@ public class CertificateUserPasswordController extends AccessTokenController {
 		    .createClientCertificateAuthRequestFactory(
 			    ks.getInputStream(),
 			    resourceDetails.getClientSecret());
-	    
+
 	    resourceDetails.setClientId(ks.getOriginalFilename());
 	    // request factory para as operacoes OAuth2
 	    restTemplate.setRequestFactory(requestFactory);
@@ -80,7 +76,8 @@ public class CertificateUserPasswordController extends AccessTokenController {
 	    // associa o provider ao restTemplate das operações OAuth2
 	    restTemplate.setAccessTokenProvider(tokenProvider);
 	} catch (IOException e) {
-	    LOGGER.error("[obterAccessToken] Impossible to load keystore file", e);
+	    LOGGER.error("[obterAccessToken] Impossible to load keystore file",
+		    e);
 	    this.handleError(e);
 	    return this.getModelAndView();
 	}
@@ -131,8 +128,8 @@ public class CertificateUserPasswordController extends AccessTokenController {
 	}
 
 	final SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
-		sslContext, new String[] { "TLSv1", "TLSv1.1", "TLSv1.2" }, null,
-		SSLConnectionSocketFactory.getDefaultHostnameVerifier());
+		sslContext, new String[] { "TLSv1", "TLSv1.1", "TLSv1.2" },
+		null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 
 	return sslsf;
     }

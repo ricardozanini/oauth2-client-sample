@@ -17,5 +17,5 @@ public abstract class AccessTokenController extends BaseController {
 	    ResourceOwnerPasswordResourceDetails resourceDetails) {
 	this.getModelAndView().addObject("resourceDetails", resourceDetails);
     }
-
+    
 }
