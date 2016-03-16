@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.tecnobiz</groupId>
 	<artifactId>oauth2-client-sample</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 	<packaging>war</packaging>
 	<name>oauth2-client-sample</name>
 	<description>A simple OAuth2 Client</description>
@@ -61,7 +61,7 @@
 		<javax.transaction>1.1</javax.transaction>
 
 		<!-- One Library to rule them all -->
-		<spring.version>4.0.9.RELEASE</spring.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
 		<spring.sec.oauth.version>2.0.7.RELEASE</spring.sec.oauth.version>
 		<bouncy.castle.version>1.52</bouncy.castle.version>
 
