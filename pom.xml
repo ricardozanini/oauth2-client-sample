@@ -82,6 +82,7 @@
 		<jacoco-maven-plugin.version>0.7.4.201502262128</jacoco-maven-plugin.version>
 		<maven.compiler.version>3.1</maven.compiler.version>
 		<war-plugin.version>2.6</war-plugin.version>
+		<wildfly.version>1.1.0.Alpha11</wildfly.version>
 	</properties>
 
 	<dependencies>
@@ -290,6 +291,11 @@
 						</manifest>
 					</archive>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>${wildfly.version}</version>
 			</plugin>
 		</plugins>
 	</build>
