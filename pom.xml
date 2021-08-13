@@ -63,7 +63,7 @@
 		<!-- One Library to rule them all -->
 		<spring.version>4.3.24.RELEASE</spring.version>
 		<spring.sec.oauth.version>2.0.17.RELEASE</spring.sec.oauth.version>
-		<bouncy.castle.version>1.52</bouncy.castle.version>
+		<bouncy.castle.version>1.67</bouncy.castle.version>
 
 		<!-- UI -->
 		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
