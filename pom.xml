@@ -61,7 +61,7 @@
 		<javax.transaction>1.1</javax.transaction>
 
 		<!-- One Library to rule them all -->
-		<spring.version>6.1.14</spring.version>
+		<spring.version>6.1.20</spring.version>
 		<spring.sec.oauth.version>2.0.18.RELEASE</spring.sec.oauth.version>
 		<bouncy.castle.version>1.67</bouncy.castle.version>
 
